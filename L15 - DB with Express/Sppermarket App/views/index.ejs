@@ -32,9 +32,11 @@
       <thead>
           <tr>
             <th width="100">Product Name</th>
-            <th width="100">Rroduct Image</th>
+            <th width="100">Product Image</th>
             <th width="50">Quantity</th>
             <th width="50">Price</th>
+            <th width="50">Edit</th>
+            <th width="50">Delete</th>
           </tr>
       </thead>
       <tbody>
@@ -42,9 +44,11 @@
           <tr>
             <td><a href="/product/<%= products[i].productId %>" ><%= products[i].productName %></a></td>
             <td><img src="<%= products[i].image %>" width="50%"></td>
-            <td><%= products[i].productName %></td>
             <td><%= products[i].quantity %></td>
             <td>$<%= products[i].price.toFixed(2) %></td>
+            <td><a href="/editProduct/<%= products[i].productId %>">Edit</a></td>
+            <td><a href="/deleteProduct/<%= products[i].productId %>"
+              onclick="return confirm('Are you sure you want to delete this product?');">Delete</a></td>
           </tr>
         <% } %>
       </tbody>
