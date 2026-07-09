@@ -13,18 +13,16 @@
 <body class="bg-light">
 
   <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="/">🛒 Supermarket App</a>
-
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Supermarket App</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav ms-auto">
+        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/addProduct">Add New Product</a>
+            <a class="nav-link" href="/addProduct">Add new product</a>
           </li>
         </ul>
       </div>
@@ -48,7 +46,7 @@
 
             <div class="card-body">
 
-              <form action="/editProduct/<%= product.productId %>" method="POST">
+              <form action="/editProduct/<%= product.productId %>" method="POST" enctype="multipart/form-data"> 
 
                 <div class="mb-3">
                   <label for="name" class="form-label">
@@ -83,9 +81,13 @@
                   </label>
 
                   <div class="text-center">
-                    <img src="<%= product.image %>" alt="<%= product.productName %>" class="img-fluid rounded border"
-                      style="max-height: 200px;">
-                  </div>
+                    <input type="text" name="currentImage" class="form-control" value="<%=product.image %>" readonly><br>
+                    <img src="/images/<%= product.image %>" width="20%"><br><br>
+                    New Image:<br> <input type="file" class="form-control" id="image" name="image" accept="image/*" value="<%=product.image %>"
+                    ><br><br>
+                    <!--<img src="/images/<%= product.image %>" alt="<%= product.productName %>"
+                      class="img-fluid rounded border" style="max-height: 200px;">
+                  </div> -->
                 </div>
 
                 <div class="d-grid gap-2">

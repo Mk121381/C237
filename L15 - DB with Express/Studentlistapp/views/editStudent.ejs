@@ -13,21 +13,21 @@
 <body class="bg-light">
 
   <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">Student List App</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="/addStudent">Add new student</a>
-            </li> 
-          </ul>
-        </div>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Student List App</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/addStudent">Add new student</a>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
   <!-- Update Form -->
   <div class="container mt-5">
@@ -46,15 +46,14 @@
 
             <div class="card-body">
 
-              <form action="/editStudent/<%= student.studentId %>" method="POST">
+              <form action="/editStudent/<%= student.studentId %>" method="POST" enctype="multipart/form-data">
 
                 <div class="mb-3">
                   <label for="name" class="form-label">
                     Student Name
                   </label>
 
-                  <input type="text" class="form-control" id="name" name="name" value="<%= student.name %>"
-                    required>
+                  <input type="text" class="form-control" id="name" name="name" value="<%= student.name %>" required>
                 </div>
 
                 <div class="mb-3">
@@ -62,26 +61,33 @@
                     Date of Birth
                   </label>
 
-                <input type="date" class="form-control" id="dob" name="dob"
-                  value="<%= student.dob.toISOString().split('T')[0] %>" required>
-              </div>
+                  <input type="date" class="form-control" id="dob" name="dob"
+                    value="<%= student.dob.toISOString().split('T')[0] %>" required>
+                </div>
 
                 <div class="mb-3">
                   <label for="contact" class="form-label">
                     Contact
                   </label>
 
-                  <input type="text" class="form-control" id="contact" name="contact" value="<%= student.contact %>" required>
+                  <input type="text" class="form-control" id="contact" name="contact" value="<%= student.contact %>"
+                    required>
                 </div>
-            
+
                 <div class="mb-3">
                   <label class="form-label">
                     Current Image
                   </label>
 
                   <div class="text-center">
-                    <img src="<%= student.image %>" alt="<%= student.name %>" class="img-fluid rounded border"
-                      style="max-height: 200px;">
+                    <input type="text" name="currentImage" class="form-control" value=<%=student.image %> readonly><br>
+                    <img src="/images/<%= student.image %>" width="20%"><br><br>
+                    New Image:<br> <input type="file" id="image" name="image" class="form-control" accept="image/*" value=<%=student.image %>
+                    ><br><br>
+
+                    <!-- <img src="/images/<%= student.image %>" alt="<%= student.name %>" class="img-fluid rounded border"
+                      style="max-height: 200px;"> -->
+
                   </div>
                 </div>
 

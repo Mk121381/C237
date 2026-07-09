@@ -1,6 +1,18 @@
 const express = require('express');
 const mysql = require('mysql2');
+const multer = require('multer');
 const app = express();
+
+// Set up multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images'); // Directory to save uploaded files
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+});
+const upload = multer({ storage: storage });
 
 // Create MySQL connection 
 const connection = mysql.createConnection({
@@ -75,9 +87,16 @@ app.get('/addProduct', (req, res) => {
     res.render('addProduct');
 });
 
-app.post('/addProduct', (req, res) => {
+app.post('/addProduct', upload.single('image'), (req, res) => {
     // Extract product data from the request body
-    const { name, quantity, price, image } = req.body;
+    //const { name, quantity, price, image } = req.body;
+    const { name, quantity, price } = req.body;
+    let image;
+    if (req.file) {
+        image = req.file.filename; // Save only the filename
+    } else {
+        image = null;
+    }
     const sql = 'INSERT INTO products (productName, quantity, price, image) VALUES (?, ?, ?, ?)';
     // Insert the new product into the database
     connection.query(sql, [name, quantity, price, image], (error, results) => {
@@ -112,13 +131,17 @@ app.get('/editProduct/:id', (req, res) => {
     });
 });
 
-app.post('/editProduct/:id', (req, res) => {
+app.post('/editProduct/:id', upload.single('image'), (req, res) => {
     const productId = req.params.id;
     // Extract product data from the request body
     const { name, quantity, price } = req.body;
-    const sql = 'UPDATE products SET productName = ? , quantity = ?, price = ? WHERE productId = ?';
+    let image = req.body.currentImage; //retrieve current image filename
+    if (req.file) { //if new image is uploaded
+        image = req.file.filename; // set image to be new image filename
+    }
+    const sql = 'UPDATE products SET productName = ? , quantity = ?, price = ?, image = ? WHERE productId = ?';
     // Insert the new product into the database
-    connection.query(sql, [name, quantity, price, productId], (error, results) => {
+    connection.query(sql, [name, quantity, price, image, productId], (error, results) => {
         if (error) {
             // Handle any error that occurs during the database operation
             console.error("Error updating product:", error);
