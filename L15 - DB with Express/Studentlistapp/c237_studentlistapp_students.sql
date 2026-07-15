@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `c237_studentlistapp` /*!40100 DEFAULT CHARACTER SET latin1 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `c237_studentlistapp`;
 -- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: c237_studentlistapp
@@ -29,7 +31,7 @@ CREATE TABLE `students` (
   `contact` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
   `image` varchar(1000) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`studentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +40,7 @@ CREATE TABLE `students` (
 
 LOCK TABLES `students` WRITE;
 /*!40000 ALTER TABLE `students` DISABLE KEYS */;
-INSERT INTO `students` VALUES (1,'John Edward','2007-05-05','98765432','1.jpg'),(2,'Mary Thomson','2006-02-04','98765678','2.jpg'),(3,'Benny Teo','2006-08-17','98789879','3.jpg'),(4,'May Lim','2004-09-10','98889889','4.jpg');
+INSERT INTO `students` VALUES (1,'Nohara Shinnosuke','2007-05-04','98765432','1.jpg'),(2,'Nohara Himawari','2006-02-03','98765678','2.jpg'),(3,'Nohara Misae','2006-08-16','98789879','3.jpg'),(4,'Sakurada Nene','2004-09-09','98889889','4.jpg'),(6,'Kazama Toru','2010-03-17','88889999','5.jpg'),(7,'Suotome Ai','2019-02-15','77778888','6.jpg');
 /*!40000 ALTER TABLE `students` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-09 12:27:47
+-- Dump completed on 2026-07-09 12:59:21
