@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L04 Exercises</title>
+</head>
+<body>
+    <h1 id="message">Welcome</h1>
+
+    <!--EX2 add button to detect onclick and call function-->
+    <button onclick="showMessage()">Click me</button>
+    <button onclick="showColor()">Change Text Color</button>
+    <br><br>
+    <!-- <form action="", method="POST"> -->
+    Name: <input id="name" required> <button onclick="showName()">Submit</button>
+    <!-- </form> -->
+    <script>
+        // Ex1
+        document.getElementById("message").innerText= "Hello Student!";
+
+        // Ex2
+        function showMessage(){
+                alert("Welcome to C237!");
+            }
+
+        function showColor(){
+                 document.getElementById("message").style.color = "blue";
+            }
+
+        // Ex3
+        function showName(){
+                let name = document.getElementById("name").value;
+                if (name.length == 0) {
+                    alert("Pleace put in your name");
+                }
+
+                else {
+                document.getElementById("message").innerText = "Hello " + name + "!";
+                alert("Hi " + name + " Welcome!");
+                }
+            }
+
+       
+    </script>
+</body>
+</html>

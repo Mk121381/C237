@@ -1,0 +1,293 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+ 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+ 
+  <title>My Supermarket</title> 
+ 
+  <!-- Bootstrap CSS --> 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+  <!-- Bootstrap JS --> 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link a href="product.html">
+  <link a href="contact.html">
+  <style>
+       body {
+            background: linear-gradient(145deg, #faf8ef 0%, #f2efe2 100%);
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* the green header */
+        .navbar-supermarket {
+            background: #1e3b2c !important;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 1.6rem;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #f8f9e6;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link.active {
+            color: #ffd966;
+        }
+        /* contact */
+        .contact-header {
+            background: linear-gradient(105deg, #2a5c3e 0%, #1d4530 100%);
+            border-radius: 2rem;
+            color: white;
+            padding: 2rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 12px 20px -8px rgba(0,0,0,0.2);
+        }
+        .contact-icon-box {
+            background: rgba(255,255,240,0.15);
+            backdrop-filter: blur(4px);
+            border-radius: 3rem;
+            padding: 0.8rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        /* car info */
+        .info-card {
+            background: white;
+            border-radius: 1.5rem;
+            border: none;
+            box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            height: 100%;
+            padding: 1.5rem 1.2rem;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+        }
+        .info-icon {
+            font-size: 2.5rem;
+            color: #2c7840;
+            margin-bottom: 1rem;
+        }
+        .info-title {
+            font-weight: 800;
+            color: #1e3b2c;
+            margin-bottom: 0.8rem;
+            font-size: 1.35rem;
+        }
+        .contact-form-card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 2rem;
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+            border: none;
+            transition: all 0.2s;
+        }
+        .contact-form-card:hover{
+            transform: translateY(-5px);
+        }
+        .form-control, .form-select {
+            border-radius: 1rem;
+            border: 1px solid #e0daca;
+            padding: 0.7rem 1rem;
+            background-color: #fefcf5;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #ffb347;
+            box-shadow: 0 0 0 0.25rem rgba(255, 180, 71, 0.25);
+        }
+        .btn-submit {
+            background: #2c7840;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            transition: 0.2s;
+            color: white;
+            width: 100%;
+            font-size: 1rem;
+        }
+        .btn-submit:hover {
+            background: #1f5a32;
+            transform: scale(0.98);
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: #f0ede3;
+            border-radius: 50%;
+            margin-right: 12px;
+            color: #2c7840;
+            font-size: 1.4rem;
+            transition: all 0.2s;
+        }
+        .social-link:hover {
+            background: #2c7840;
+            color: white;
+            transform: translateY(-3px);
+        }
+        /* map */
+        .map-placeholder {
+            background: #d9d2bc;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            color: #5e5a49;
+            background-image: radial-gradient(circle at 10% 30%, rgba(120,90,40,0.1) 2%, transparent 2.5%);
+            background-size: 28px 28px;
+        }
+        footer {
+            background: #1e2f24;
+            color: #ddd9c6;
+            margin-top: 3rem;
+        }
+        .custom-contact-row {
+            margin-bottom: 2rem;
+        }
+        .equal-height {
+        display: flex;
+        flex-wrap: wrap;
+        }
+
+  </style>
+ 
+</head> 
+ 
+<body class=""> 
+    
+ 
+<!-- Navigation --> 
+<nav class="navbar navbar-expand-lg navbar-dark navbar-supermarket sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <i class="fas fa-store me-2"></i>My Supermarket
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#supermarketNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="supermarketNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="product.html"><i class="fas fa-tags"></i> Product</a></li>
+                <li class="nav-item"><a class="nav-link active" href="contact.html"><i class="fas fa-headset"></i> Contact Us</a></li>
+            </ul>
+
+            <!--Our contect-->
+            <div class="d-flex">
+                <span class="text-light small"><i class="fas fa-phone-alt me-1"></i> Contact Us 8888 8888</span>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- Page Content --> 
+ <main class=" container py-4">
+    <div class="contact-header">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h3 class="display-6 fw-bold mb-3"><i class="fas fa-envelope-open-text me-3"></i>Welcome to My Supermarket</h3>
+                <p class="lead mb-3">We are looks forward to communicating with you!</p>
+                <div class="contact-icon-box mt-2">
+                    <i class="fas fa-clock"></i>
+                    <span>Mon - Sun 08:00 - 22:00</span>
+                </div>
+            </div>
+            <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
+                <i class="fa-solid fa-handshake" style="font-size: 5rem; opacity: 0.7;"></i>
+            </div>
+        </div>
+    </div>
+    <div class="row g-4">
+      <!-- left side col-lg-6 -->
+      <div class="col-lg-6">
+        <div class="contact-form-card">
+          <h3 class="fw-bold mb-3" style="color:#1e3b2c;"><i class="fas fa-pen-alt me-2"></i>Send us a Message</h3>
+          <p class="text-muted mb-4">We will get back to you as soon as possible, within 24 hours.</p>
+          <form id="contactForm" action="#" method="post">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold"><i class="fas fa-user"></i> Name *</label>
+                <input type="text" class="form-control" id="nameInput" placeholder="Example: Jona Tan" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold"><i class="fas fa-envelope"></i> Email *</label>
+                <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold"><i class="fas fa-phone-alt"></i> Phone number (optional)</label>
+                <input type="tel" class="form-control" id="phoneInput" placeholder="+65 1234 5678">
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-semibold"><i class="fas fa-comment-dots"></i> Message *</label>
+                <textarea class="form-control" rows="4" id="messageContent" placeholder="Tell us your suggestion or feedback..." required></textarea>
+              </div>
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn-submit"><i class="fas fa-paper-plane me-2"></i>Submit</button>
+              </div>
+              <div class="col-12">
+                <div id="formFeedbackMsg" class="small mt-2 fst-italic"></div>
+              </div>
+            </div>
+          </form>
+          <hr class="my-4">
+          <div class="text-center">
+            <h5 class="fw-bold mb-3"><i class="fas fa-share-alt"></i> Follow us and get to know more news!</h5>
+            <div>
+              <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="social-link" aria-label="WeChat"><i class="fab fa-weixin"></i></a>
+              <a href="#" class="social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- right side - map/Us -->
+        <div class="col-lg-3">
+            <div class="info-card mb-4">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h4 class="info-title">Our Supermarket Address</h4>
+                <p class="mb-2">Woodland North<br>B1-23 My Supermarket</p>
+                <div class="map-placeholder mt-3">
+                    <i class="fas fa-map" style="font-size: 2rem; color:#7c6e4e;"></i>
+                    <p class="mb-0 mt-2 small"><i class="fas fa-location-dot"></i> Map | Woodland north B1-23 My Supermarket</p>
+                    <div class="mt-1">📍 Convenient parking | Open daily 08:00–22:00</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="info-card mb-4">
+                <div class="info-icon"><i class="fas fa-headset"></i></div>
+                <h4 class="info-title">Customer Service</h4>
+                <p><i class="fas fa-phone-alt me-2 text-success"></i> Hotline：<strong>8888 8888</strong><br>
+                <i class="fas fa-envelope me-2 text-success"></i> Email：<strong>service@mysupermarket.com</strong><br>
+                <hr>
+                <div class="small text-muted"><i class="fas fa-comment-dots"></i> Online service hour: 08:00-22:00</div>
+            </div>
+        </div>
+    </div>
+  </div>
+  </main>
+
+
+<footer class="text-center py-4 mt-4">
+    <div class="container">
+        <p class="mb-0"><i class="fas fa-shopping-basket me-2"></i> My Supermarket  |  <i class="fas fa-clock"></i> Opening 08:00 - 22:00</p>
+        <p class="small mt-2"><i class="fas fa-map-marker-alt"></i> Online supermarket | Express delivery | Worry-free after-sales service</p>
+        <p class="small mb-0 text-white-50">© 2026 My Supermarket</p>
+    </div>
+</footer>
+ 
+</body> 
+</html>

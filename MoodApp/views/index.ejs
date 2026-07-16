@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="/C237/MoodApp/public/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Daily Mood Journal</title>
+    <style>
+        /* background */
+        body {
+            background: #d4eaff !important;
+            font-family: 'Segoe UI', 'Quicksand', system-ui, sans-serif;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+        
+        /* bubble grid */
+        .bubble-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        /* single bubble card — now as a clickable link */
+        a.bubble-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(4px);
+            width: 230px;
+            border-radius: 48% 52% 45% 55% / 65% 40% 60% 35%;
+            padding: 1.8rem 1rem 1.2rem;
+            box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            text-align: center;
+            animation: float 4s infinite ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            text-decoration: none;      /* remove underline */
+            display: block;              /* make it block level to preserve card dimensions */
+            color: inherit;             /* inherit text color */
+            cursor: pointer;
+        }
+        
+        /* different float delays */
+        .bubble-card:nth-child(odd) { animation-delay: 0s; animation-duration: 3.5s; }
+        .bubble-card:nth-child(3n) { animation-delay: 0.5s; animation-duration: 4.2s; }
+        .bubble-card:nth-child(5n+2) { animation-delay: 1s; animation-duration: 3.8s; }
+        
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .bubble-card:hover {
+            transform: scale(1.02) translateY(-5px);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 20px 30px -8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* emoji */
+        .bubble-emoji {
+            font-size: 4rem;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+            margin-bottom: 0.5rem;
+        }
+        
+        /* mood text */
+        .bubble-mood {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2c6e9e;
+            margin: 0.5rem 0;
+        }
+        
+        /* empty state */
+        .empty-state {
+            background: rgba(255,255,240,0.9);
+            border-radius: 70px;
+            padding: 2rem;
+            text-align: center;
+            max-width: 500px;
+            margin: 3rem auto;
+        }
+        
+        /* big button */
+        .btn-new-mood {
+            background: #5fa7cf;
+            border: none;
+            padding: 12px 32px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 60px;
+            color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .btn-new-mood:hover {
+            background: #3f8aba;
+            transform: scale(1.02);
+            color: white;
+        }
+        
+        /* title */
+        .page-title {
+            text-align: center;
+            color: #2c6e9e;
+            margin: 1rem 0 0.5rem;
+            font-weight: 700;
+        }
+        hr {
+            background: #8fc1df;
+            height: 2px;
+            width: 80px;
+            margin: 0 auto;
+            opacity: 0.6;
+        }
+        
+        @media (max-width: 640px) {
+            .bubble-card { width: 180px; padding: 1rem; }
+            .bubble-emoji { font-size: 3rem; }
+            .bubble-mood { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/navbar.ejs') %>
+    
+    <div class="container mt-2">
+        <div class="page-title">
+            <h2><i class="bi bi-balloon-heart"></i> Daily Mood Bubble</h2>
+            <hr>
+            <p class="text-muted" style="color: #4f7ea3 !important;">Every bubble holds a feeling</p>
+        </div>
+        
+        <% if (moods.length === 0) { %>
+            <div class="empty-state">
+                <i class="bi bi-cloud-rainbow" style="font-size: 4rem; color: #6fa8dc;"></i>
+                <h4 class="mt-2">No bubbles yet~</h4>
+                <p>Create your first mood bubble</p>
+                <a href="/addmoods" class="btn-new-mood"><i class="bi bi-plus-circle"></i> Start New Mood</a>
+            </div>
+        <% } else { %>
+            <div class="bubble-grid">
+                <% for (let i = 0; i < moods.length; i++) { 
+                    const mood = moods[i];
+                    let emoji = '';
+                    if (mood.mood === 'Happy') emoji = '😊';
+                    else if (mood.mood === 'Calm') emoji = '😌';
+                    else if (mood.mood === 'Excited') emoji = '🤩';
+                    else if (mood.mood === 'Tired') emoji = '😫';
+                    else if (mood.mood === 'Sad') emoji = '😢';
+                    else emoji = '✨';
+                %>
+                <!-- User click can view details   -->
+                <a href="/moods/<%= mood.id %>" class="bubble-card">
+                    <div class="bubble-emoji"><%= emoji %></div>
+                    <div class="bubble-mood"><%= mood.mood %></div>
+                </a>
+                <% } %>
+            </div>
+        <% } %>
+        
+        <div class="text-center mt-3 mb-4">
+            <a href="/addmoods" class="btn-new-mood">
+                <i class="bi bi-plus-lg"></i> Start New Mood
+                <i class="bi bi-balloon"></i>
+            </a>
+        </div>
+    </div>
+    
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>

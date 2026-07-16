@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>My Supermarket | 精选超市好物</title>
+    <!-- Bootstrap 5 + Icons + 超市主题优化 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* 全局超市氛围：暖色清新背景 */
+        body {
+            background: linear-gradient(135deg, #f8f5e9 0%, #f1f0e6 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            padding-top: 0;
+        }
+        /* 导航栏超市主题深绿风格 */
+        .navbar-supermarket {
+            background: #1e3b2c !important;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 1.6rem;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #f8f9e6;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #ffd966;
+            transform: translateY(-2px);
+        }
+        /* 搜索栏定制 */
+        .search-container .input-group {
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .search-container .form-control {
+            border: none;
+            background-color: #fff8e7;
+            padding: 0.6rem 1.2rem;
+        }
+        .search-container .btn-outline-light {
+            background: #ffb347;
+            border: none;
+            color: #2c3e2b;
+            padding: 0 1.2rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        .search-container .btn-outline-light:hover {
+            background: #ff9f1c;
+            color: #1e3b2c;
+        }
+        /* 卡片精致超市风格 (继承之前的精美设计但贴合食物主题) */
+        .card {
+            border: none;
+            border-radius: 1.5rem;
+            background: #ffffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.02);
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 36px -12px rgba(0, 0, 0, 0.2), 0 8px 16px -6px rgba(0, 0, 0, 0.05);
+        }
+        .card-img-top {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+            background-color: #f3efdf;
+        }
+        .card:hover .card-img-top {
+            transform: scale(1.02);
+        }
+        .card-body {
+            padding: 1.3rem 1.2rem 1.5rem;
+        }
+        .card-title {
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #2b4b2f;
+            margin-bottom: 0.3rem;
+        }
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #c45c1b;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+            margin: 0.5rem 0 0.8rem 0;
+        }
+        .price small {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #7f8c6d;
+        }
+        .btn-supermarket {
+            background: #2c7840;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.25s;
+            box-shadow: 0 4px 8px rgba(44, 120, 64, 0.2);
+            width: 100%;
+            color: white;
+        }
+        .btn-supermarket:hover {
+            background: #1f5a32;
+            transform: scale(0.98);
+            color: #fff3cf;
+        }
+        .btn-supermarket i {
+            margin-right: 8px;
+        }
+        .badge-stock {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(255,245,215,0.95);
+            backdrop-filter: blur(4px);
+            color: #b45f1b;
+            font-weight: 700;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            z-index: 2;
+            border: 0.5px solid #ffdfa5;
+        }
+        .rating i {
+            color: #f5b042;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+        }
+        /* 无结果提示样式 */
+        #noResultsMessage {
+            background: #fff7e8;
+            border-left: 6px solid #ffb347;
+            border-radius: 1rem;
+        }
+        #resultCountBadge {
+            background: #2c7840;
+            font-size: 0.8rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 30px;
+        }
+        .highlight-card {
+            box-shadow: 0 0 0 2px #ffb347, 0 0 0 4px rgba(255, 180, 71, 0.3);
+            transition: all 0.1s;
+        }
+        footer {
+            background: #1e2f24;
+            color: #ddd9c6;
+            margin-top: 3rem;
+        }
+        .container-custom {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .card-img-top {
+                height: 170px;
+            }
+            .price {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 超市风格导航栏（保留index链接语义，同时加入搜索框+icon，融入主题） -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-supermarket sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <i class="fas fa-store me-2"></i>My Supermarket
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#supermarketNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="supermarketNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="product.html"><i class="fas fa-tags"></i> Product</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-headset"></i> Contact Us</a></li>
+            </ul>
+            <!-- 搜索框 + 搜索icon (完全满足需求) -->
+            <div class="search-container">
+                <div class="input-group">
+                    <input type="text" id="searchInput" class="form-control" placeholder="搜商品... 例如：牛奶、面包、有机茶..." aria-label="超市搜索">
+                    <button class="btn btn-outline-light" type="button" id="searchButton">
+                        <i class="fas fa-search"></i> 搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- 主内容区：超市欢迎标语 -->
+<div class="container mt-4 pt-2">
+    <div class="d-flex flex-wrap justify-content-between align-items-center border-bottom pb-2 mb-4">
+        <div>
+            <h1 class="display-6 fw-bold" style="color: #2b4b2f;"><i class="fas fa-leaf me-2"></i>新鲜直送 · 超值精选</h1>
+            <p class="text-muted">每日新鲜上架，健康品质生活</p>
+        </div>
+        <span id="resultCountBadge" style="display: none;">0件商品</span>
+    </div>
+</div>
+
+<!-- 产品卡片网格区：完全融合超市主题，采用之前精美卡片设计但全部替换为食品/超市产品 保留product 3原始价格特征 -->
+<div class="container container-custom mb-5">
+    <div class="row g-4" id="productContainer">
+        <!-- 产品1：新鲜有机苹果 (超市经典) -->
+        <div class="col-md-4 col-sm-6 product-card" data-name="有机苹果新鲜水果脆甜" data-title="新鲜红富士苹果" data-price="2.50">
+            <div class="card h-100">
+                <img src="https://picsum.photos/id/108/400/300" class="card-img-top" alt="新鲜红苹果">
+                <div class="badge-stock"><i class="fas fa-leaf"></i> 有机认证</div>
+                <div class="card-body">
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <h5 class="card-title">新鲜红富士苹果</h5>
+                    <p class="text-muted small">脆甜多汁 · 产地直供</p>
+                    <div class="price">
+                        $2.50
+                        <small>/ 500g</small>
+                    </div>
+                    <button class="btn btn-supermarket view-product-btn" data-product="新鲜红富士苹果"><i class="fas fa-eye"></i> 查看商品</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品2：全麦吐司面包 (烘焙区) -->
+        <div class="col-md-4 col-sm-6 product-card" data-name="全麦吐司面包新鲜低糖" data-title="手工全麦吐司" data-price="3.20">
+            <div class="card h-100">
+                <img src="https://picsum.photos/id/292/400/300" class="card-img-top" alt="新鲜全麦面包">
+                <div class="badge-stock"><i class="fas fa-heart"></i> 每日现烤</div>
+                <div class="card-body">
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <h5 class="card-title">手工全麦吐司</h5>
+                    <p class="text-muted small">低糖高纤 · 早餐优选</p>
+                    <div class="price">
+                        $3.20
+                        <small>/ 袋</small>
+                    </div>
+                    <button class="btn btn-supermarket view-product-btn" data-product="手工全麦吐司"><i class="fas fa-eye"></i> 查看商品</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品3：经典原味薯片 (原Product 3 价格$1.80 对应超值零食) 保持$1.80核心 -->
+        <div class="col-md-4 col-sm-6 product-card" data-name="薯片零食香脆超值" data-title="酥脆原味薯片" data-price="1.80">
+            <div class="card h-100">
+                <img src="https://picsum.photos/id/127/400/300" class="card-img-top" alt="酥脆薯片">
+                <div class="badge-stock"><i class="fas fa-tag"></i> 限时特惠 $1.80</div>
+                <div class="card-body">
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <h5 class="card-title">酥脆原味薯片</h5>
+                    <p class="text-muted small">非油炸 · 咔嚓享受</p>
+                    <div class="price">
+                        $1.80
+                        <small>/ 包</small>
+                    </div>
+                    <button class="btn btn-supermarket view-product-btn" data-product="酥脆原味薯片"><i class="fas fa-eye"></i> View Product</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品4：进口全脂牛奶 (营养区) -->
+        <div class="col-md-4 col-sm-6 product-card" data-name="有机全脂牛奶新鲜牧场" data-title="澳洲牧场全脂奶" data-price="4.50">
+            <div class="card h-100">
+                <img src="https://picsum.photos/id/30/400/300" class="card-img-top" alt="新鲜牛奶">
+                <div class="badge-stock"><i class="fas fa-certificate"></i> 草饲认证</div>
+                <div class="card-body">
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <h5 class="card-title">澳洲牧场全脂奶</h5>
+                    <p class="text-muted small">高钙蛋白 · 1L装</p>
+                    <div class="price">
+                        $4.50
+                        <small>/ 瓶</small>
+                    </div>
+                    <button class="btn btn-supermarket view-product-btn" data-product="澳洲牧场全脂奶"><i class="fas fa-eye"></i> 查看商品</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品5：手工意大利面 (经典主食) -->
+        <div class="col-md-4 col-sm-6 product-card" data-name="意面通心粉进口杜兰小麦" data-title="杜兰小麦意大利面" data-price="2.99">
+            <div class="card h-100">
+                <img src="https://picsum.photos/id/126/400/300" class="card-img-top" alt="意大利面">
+                <div class="badge-stock"><i class="fas fa-utensils"></i> 经典主食</div>
+                <div class="card-body">
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <h5 class="card-title">杜兰小麦意面</h5>
+                    <p class="text-muted small">Q弹爽滑 · 家庭装</p>
+                    <div class="price">
+                        $2.99
+                        <small>/ 500g</small>
+                    </div>
+                    <button class="btn btn-supermarket view-product-btn" data-product="杜兰小麦意面"><i class="fas fa-eye"></i> 查看商品</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品6：有机绿茶 (饮品区) 展现搜索多样性 -->
+        <div class="col-md-4 col-sm-6 product-card" data-name="绿茶有机茶叶清新" data-title="高山有机绿茶" data-price="5.20">
+            <div class="card h-100">
+                <img src="https://picsum.photos/id/104/400/300" class="card-img-top" alt="有机绿茶">
+                <div class="badge-stock"><i class="fas fa-mug-hot"></i> 春茶新采</div>
+                <div class="card-body">
+                    <div class="rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <h5 class="card-title">高山有机绿茶</h5>
+                    <p class="text-muted small">清香回甘 · 罐装50g</p>
+                    <div class="price">
+                        $5.20
+                        <small>/ 罐</small>
+                    </div>
+                    <button class="btn btn-supermarket view-product-btn" data-product="高山有机绿茶"><i class="fas fa-eye"></i> 查看商品</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 无结果时消息 -->
+    <div id="noResultsMessage" class="alert alert-info text-center mt-4" style="display: none;" role="alert">
+        <i class="fas fa-search-minus me-2"></i> 没有找到相关商品，试试 “牛奶”、“面包”、“有机” 等关键词～
+    </div>
+</div>
+
+<!-- 超市小脚注 -->
+<footer class="text-center py-4 mt-4">
+    <div class="container">
+        <p class="mb-0"><i class="fas fa-shopping-basket me-2"></i> My Supermarket — 新鲜生活每一天  |  <i class="fas fa-clock"></i> 营业时间 08:00 - 22:00</p>
+        <p class="small mt-2"><i class="fas fa-map-marker-alt"></i> 线上超市 | 极速配送 | 安心售后</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    (function() {
+        // 超市搜索功能整合: 基于产品名称、data-name、data-title的数据属性进行模糊搜索
+        const productCards = document.querySelectorAll('.product-card');
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const noResultsDiv = document.getElementById('noResultsMessage');
+        const resultBadge = document.getElementById('resultCountBadge');
+
+        // 辅助获取所有可搜索文本
+        function getSearchableText(card) {
+            const titleElem = card.querySelector('.card-title');
+            const productTitle = titleElem ? titleElem.innerText.toLowerCase() : '';
+            const dataName = card.getAttribute('data-name') ? card.getAttribute('data-name').toLowerCase() : '';
+            const dataTitle = card.getAttribute('data-title') ? card.getAttribute('data-title').toLowerCase() : '';
+            const priceAttr = card.getAttribute('data-price') || '';
+            // 额外获取商品描述小字，增加搜索覆盖面
+            const descElem = card.querySelector('.text-muted.small');
+            const descText = descElem ? descElem.innerText.toLowerCase() : '';
+            return `${productTitle} ${dataName} ${dataTitle} ${priceAttr} ${descText}`;
+        }
+
+        function filterProducts(keyword) {
+            const trimmed = keyword.trim().toLowerCase();
+            let visibleCount = 0;
+
+            productCards.forEach(card => {
+                const searchable = getSearchableText(card);
+                let isMatch = false;
+                if (trimmed === "") {
+                    isMatch = true;
+                } else {
+                    isMatch = searchable.includes(trimmed);
+                }
+                if (isMatch) {
+                    card.style.display = '';
+                    visibleCount++;
+                    if (trimmed !== "") {
+                        card.classList.add('highlight-card');
+                    } else {
+                        card.classList.remove('highlight-card');
+                    }
+                } else {
+                    card.style.display = 'none';
+                    card.classList.remove('highlight-card');
+                }
+            });
+
+            // 更新UI的反馈信息
+            if (visibleCount === 0 && trimmed !== "") {
+                noResultsDiv.style.display = 'block';
+                resultBadge.style.display = 'inline-block';
+                resultBadge.innerText = `0 件商品`;
+                resultBadge.className = "badge bg-warning text-dark";
+            } else if (trimmed !== "") {
+                noResultsDiv.style.display = 'none';
+                resultBadge.style.display = 'inline-block';
+                resultBadge.innerText = `${visibleCount} 件商品`;
+                resultBadge.className = "badge bg-success";
+            } else {
+                noResultsDiv.style.display = 'none';
+                resultBadge.style.display = 'none';
+            }
+        }
+
+        function performSearch() {
+            const keyword = searchInput.value;
+            filterProducts(keyword);
+        }
+
+        // 绑定搜索按钮 和 实时输入（现代超市交互）
+        if (searchButton) {
+            searchButton.addEventListener('click', performSearch);
+        }
+        if (searchInput) {
+            searchInput.addEventListener('input', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+        }
+
+        // “查看商品” 按钮弹窗提醒模拟超市体验
+        const viewBtns = document.querySelectorAll('.view-product-btn');
+        viewBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const product = this.getAttribute('data-product') || this.closest('.card')?.querySelector('.card-title')?.innerText || '商品';
+                alert(`🛒 ${product} \n来自 My Supermarket 的新鲜好物！\n更多详情即将上线，感谢选购。`);
+            });
+        });
+
+        // 初始显示所有卡片
+        filterProducts('');
+    })();
+</script>
+</body>
+</html>

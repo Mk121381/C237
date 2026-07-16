@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Supermarket - Fresh Vegetables</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(145deg, #faf8ef 0%, #f2efe2 100%);
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Deep green supermarket navigation */
+    .navbar-supermarket {
+      background: #1e3b2c !important;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 1.6rem;
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+      color: #f8f9e6;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .navbar-dark .navbar-nav .nav-link:hover,
+    .navbar-dark .navbar-nav .nav-link.active {
+      color: #ffd966;
+    }
+
+    /* Product card  */
+    .product-card {
+      border: none;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: white;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-img {
+      height: 180px;
+      object-fit: cover;
+      width: 100%;
+      background: #f3efdf;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #c97e2c;
+    }
+
+    .btn-view {
+      background-color: #2c7840;
+      color: white;
+      border-radius: 25px;
+      padding: 8px 16px;
+      border: none;
+      width: 100%;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .btn-view:hover {
+      background-color: #1f5a32;
+      transform: scale(0.97);
+    }
+
+    footer {
+      background: #1e2f24;
+      color: #ddd9c6;
+      margin-top: 3rem;
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Modal image */
+    .modal-product-img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .veg-banner {
+      background: linear-gradient(105deg, #2a5c3e 0%, #1d4530 100%);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-supermarket sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-store me-2"></i>My Supermarket
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#supermarketNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="supermarketNavbar">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="product.html"><i class="fas fa-tags"></i> Product</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html"><i class="fas fa-headset"></i> Contact Us</a></li>
+        </ul>
+        <div class="d-flex">
+          <span class="text-light small"><i class="fas fa-phone-alt me-1"></i> Contact Us 8888 8888</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content  -->
+  <div class="container py-4">
+    <!-- Vegetable-->
+     <div class="bg-success text-white p-4 rounded-4 mb-4 text-center" style="background: #2a5c3e !important;">
+         <h2><i class="fa-solid fa-dumpster-fire" style="color: rgb(255, 212, 59);"></i> Today's Specials</h2>
+         <p class="mb-0">Fresh & Quality - Direct from farm to you!</p>
+      </div>
+
+    <div class="row g-4">
+      <!-- Product 1  -->
+      <div class="col-md-6 col-lg-4">
+        <div class="product-card card h-100">
+          <img src="image/broccoli.jpeg" class="product-img" alt="Broccoli">
+          <div class="card-body">
+            <h4> Fresh Broccoli</h4>
+            <div class="price">$2.99 <small class="text-muted">/each</small></div>
+            <p class="text-muted small">Crisp, vibrant green broccoli, rich in vitamins & fiber.
+            </p>
+            <button class="btn-view" 
+                    data-name="Fresh Broccoli" 
+                    data-price="$2.99 / each" 
+                    data-desc="Farm-fresh organic broccoli, harvested daily. High in Vitamin C & K, perfect for stir-fry or steaming. Rich in antioxidants and fiber." 
+                    data-img="image/broccoli.jpeg">
+              <i class="fas fa-info-circle"></i> View Product
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="product-card card h-100">
+          <img src="image/lemon.jpeg" class="product-img" alt="Lemon">
+          <div class="card-body">
+            <h4> Fresh Lemon</h4>
+            <div class="price">$0.79 <small class="text-muted">/each</small></div>
+            <p class="text-muted small">Juicy and tangy lemons.</p>
+            <button class="btn-view" 
+                    data-name="Fresh Lemon" 
+                    data-price="$0.79 / each" 
+                    data-desc="Freshly picked lemons with bright citrus flavor. Rich in Vitamin C, great for lemonade, detox water, marinades and desserts." 
+                    data-img="image/lemon.jpeg">
+              <i class="fas fa-info-circle"></i> View Product
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="product-card card h-100">
+          <img src="image/Potato.jpeg" class="product-img" alt="Potato">
+          <div class="card-body">
+            <h4> Fresh Potato</h4>
+            <div class="price">$0.45 <small class="text-muted">/500g</small></div>
+            <p class="text-muted small">Starchy, versatile potatoes.</p>
+            <button class="btn-view" 
+                    data-name="Fresh Potato" 
+                    data-price="$0.45 / 500g" 
+                    data-desc="Premium quality potatoes, grown in rich soil. Ideal for boiling, baking, frying or mashing. Naturally delicious and filling." 
+                    data-img="image/Potato.jpeg">
+              <i class="fas fa-info-circle"></i> View Product
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="product-card card h-100">
+          <img src="image/cherry.jpeg" class="product-img" alt="Cherry">
+          <div class="card-body">
+            <h4> Fresh Cherries</h4>
+            <div class="price">$8.99 <small class="text-muted">/box</small></div>
+            <p class="text-muted small">Sweet, dark red cherries, juicy and full of flavor.</p>
+            <button class="btn-view" 
+                    data-name="Fresh Cherries" 
+                    data-price="$8.99 / box" 
+                    data-desc="Premium sweet cherries, hand-picked at peak ripeness. Bursting with sweetness and antioxidants. Perfect for snacking, desserts or smoothie bowls." 
+                    data-img="image/cherry.jpeg">
+              <i class="fas fa-info-circle"></i> View Product
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5  -->
+      <div class="col-md-6 col-lg-4">
+        <div class="product-card card h-100">
+          <img src="image/tomato.jpeg" class="product-img" alt="Tomato">
+          <div class="card-body">
+            <h4> Fresh Tomato</h4>
+            <div class="price">$0.69 <small class="text-muted">/each</small></div>
+            <p class="text-muted small">Ripe, juicy tomatoes with rich, sweet flavor.</p>
+            <button class="btn-view" 
+                    data-name="Fresh Tomato" 
+                    data-price="$0.69 / each" 
+                    data-desc="Vine-ripened juicy tomatoes, bright red and flavorful. Excellent for salads, sandwiches, sauces and salsas. Locally sourced for maximum freshness." 
+                    data-img="image/tomato.jpeg">
+              <i class="fas fa-info-circle"></i> View Product
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6  -->
+      <div class="col-md-6 col-lg-4">
+        <div class="product-card card h-100">
+          <img src="image/cucumber.jpeg" class="product-img" alt="Cucumber">
+          <div class="card-body">
+            <h4> English Cucumber</h4>
+            <div class="price">$1.99 <small class="text-muted">/each</small></div>
+            <p class="text-muted small">Seedless, crisp cucumber with thin skin.</p>
+            <button class="btn-view" 
+                    data-name="English Cucumber" 
+                    data-price="$1.99 / each" 
+                    data-desc="Long, seedless English cucumber, refreshing and low-calorie. Thin skin means no peeling needed. Great for fresh salads, sandwiches or infused water." 
+                    data-img="image/cucumber.jpeg">
+              <i class="fas fa-info-circle"></i> View Product
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Details Modal -->
+  <div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <img id="modalImg" class="modal-product-img" src="" alt="Product">
+        <div class="modal-body">
+          <h3 id="modalName" class="fw-bold">Product Name</h3>
+          <h4 id="modalPrice" class="mt-2" style="color:#c97e2c !important; font-weight:bold;">$0.00</h4>
+          <p id="modalDesc" class="mt-3 text-secondary">Product description here.</p>
+          <hr>
+          <div class="d-flex gap-2">
+            <button id="addToCartBtn" class="btn btn-success flex-grow-1 py-2" style="background:#2c7840;">
+              <i class="fas fa-cart-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+    <div id="cartToast" class="toast bg-success text-white" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">
+         <span id="toastMsg">Added to cart!</span>
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p class="mb-0"><i class="fas fa-shopping-basket me-2"></i> My Supermarket | <i class="fas fa-clock"></i> Opening 08:00 - 22:00</p>
+      <p class="small mt-2"><i class="fas fa-map-marker-alt"></i> Online supermarket | Express delivery | Worry-free after-sales service</p>
+      <p class="small mb-0 text-white-50">© 2026 My Supermarket</p>
+    </div>
+  </footer>
+
+  <script>
+    // Modal elements and toast initialization
+    const modal = new bootstrap.Modal(document.getElementById('productModal'));
+    const modalImg = document.getElementById('modalImg');
+    const modalName = document.getElementById('modalName');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc = document.getElementById('modalDesc');
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    const toastEl = document.getElementById('cartToast');
+    const toastMsgSpan = document.getElementById('toastMsg');
+
+    let toast = new bootstrap.Toast(toastEl, { delay: 1500 });
+    let currentProductName = '';
+
+    // Function to show modal with product details
+    function showProductModal(btn) {
+      currentProductName = btn.getAttribute('data-name');
+      modalName.innerText = currentProductName;
+      modalPrice.innerText = btn.getAttribute('data-price');
+      modalDesc.innerText = btn.getAttribute('data-desc');
+      modalImg.src = btn.getAttribute('data-img');
+      modal.show();
+    }
+
+    //  "View Product" buttons
+    document.querySelectorAll('.btn-view').forEach(btn => {
+      btn.addEventListener('click', () => showProductModal(btn));
+    });
+
+    // Add to cart button 
+    addToCartBtn.addEventListener('click', () => {
+      if (currentProductName) {
+        toastMsgSpan.innerText = `${currentProductName} added to cart!`;
+      } else {
+        toastMsgSpan.innerText = `Item added to cart!`;
+      }
+      toast.show();
+    });
+  </script>
+
+</body>
+
+</html>

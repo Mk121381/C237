@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="width: auto; background-color: beige;">
+
+    <h2>Personal Information Form</h2>
+
+    <form action="submit" method="POST">
+
+        <!-- Name -->
+        <p>
+            Name:
+            <input type="text" name="name" required>
+        </p>
+
+        <!-- Email -->
+        <p>
+            Email:
+            <input type="email" name="email" required>
+        </p>
+
+        <!-- Phone -->
+        <p>
+            Phone:
+            <input type="tel" name="phone">
+        </p>
+
+        <!-- Gender -->
+        <p>
+            Gender:
+            <input type="radio" name="gender" value="male"> Male
+            <input type="radio" name="gender" value="female"> Female
+            <input type="radio" name="gender" value="other"> Other
+        </p>
+
+        <!-- Date of Birth -->
+        <p>
+            Date of Birth:
+            <input type="date" name="dob">
+        </p>
+
+        <!-- About Me -->
+        <p>
+            About Me:
+        </p>
+        <textarea name="about" rows="4" cols="30"></textarea>
+
+        <!-- Submit Button -->
+        <p>
+            <input type="submit" value="Submit">
+            <input type="reset" value="Reset">
+        </p>
+
+    </form>
+
+    <p><a href="Selfintro.html">Back to self Introduction</a></p>
+
+</body>
+</html>

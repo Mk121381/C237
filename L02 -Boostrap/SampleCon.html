@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>联系我们 - My Supermarket | 新鲜生活每一天</title>
+    <!-- Bootstrap 5 + Icons + 超市主题风格继承 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* 全局与超市主题统一 (温暖、自然、亲和) */
+        body {
+            background: linear-gradient(145deg, #faf8ef 0%, #f2efe2 100%);
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* 深绿超市风格导航栏 */
+        .navbar-supermarket {
+            background: #1e3b2c !important;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 1.6rem;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #f8f9e6;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link.active {
+            color: #ffd966;
+        }
+        /* 联系页面主容器 */
+        .contact-header {
+            background: linear-gradient(105deg, #2a5c3e 0%, #1d4530 100%);
+            border-radius: 2rem;
+            color: white;
+            padding: 2rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 12px 20px -8px rgba(0,0,0,0.2);
+        }
+        .contact-icon-box {
+            background: rgba(255,255,240,0.15);
+            backdrop-filter: blur(4px);
+            border-radius: 3rem;
+            padding: 0.8rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        /* 卡片风格信息框 */
+        .info-card {
+            background: white;
+            border-radius: 1.5rem;
+            border: none;
+            box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            height: 100%;
+            padding: 1.5rem 1.2rem;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
+        }
+        .info-icon {
+            font-size: 2.5rem;
+            color: #2c7840;
+            margin-bottom: 1rem;
+        }
+        .info-title {
+            font-weight: 800;
+            color: #1e3b2c;
+            margin-bottom: 0.8rem;
+            font-size: 1.35rem;
+        }
+        .contact-form-card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+        .form-control, .form-select {
+            border-radius: 1rem;
+            border: 1px solid #e0daca;
+            padding: 0.7rem 1rem;
+            background-color: #fefcf5;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #ffb347;
+            box-shadow: 0 0 0 0.25rem rgba(255, 180, 71, 0.25);
+        }
+        .btn-submit {
+            background: #2c7840;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            transition: 0.2s;
+            color: white;
+            width: 100%;
+            font-size: 1rem;
+        }
+        .btn-submit:hover {
+            background: #1f5a32;
+            transform: scale(0.98);
+        }
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: #f0ede3;
+            border-radius: 50%;
+            margin-right: 12px;
+            color: #2c7840;
+            font-size: 1.4rem;
+            transition: all 0.2s;
+        }
+        .social-link:hover {
+            background: #2c7840;
+            color: white;
+            transform: translateY(-3px);
+        }
+        /* 地图占位装饰 */
+        .map-placeholder {
+            background: #d9d2bc;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            color: #5e5a49;
+            background-image: radial-gradient(circle at 10% 30%, rgba(120,90,40,0.1) 2%, transparent 2.5%);
+            background-size: 28px 28px;
+        }
+        footer {
+            background: #1e2f24;
+            color: #ddd9c6;
+            margin-top: 3rem;
+        }
+        @media (max-width: 768px) {
+            .contact-header {
+                padding: 1.5rem;
+            }
+            .info-card {
+                margin-bottom: 1rem;
+            }
+        }
+        .breadcrumb-custom a {
+            text-decoration: none;
+            color: #ffd966;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 导航栏 (与超市主站风格一致，高亮contact页) -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-supermarket sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <i class="fas fa-store me-2"></i>My Supermarket
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#supermarketNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="supermarketNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="product.html"><i class="fas fa-tags"></i> Product</a></li>
+                <li class="nav-item"><a class="nav-link active" href="contact.html"><i class="fas fa-headset"></i> Contact Us</a></li>
+            </ul>
+            <!-- 保留一个小型搜索占位? 纯contact页面不需要搜索，但为了点击跳转，放个简洁装饰不干扰 -->
+            <div class="d-flex">
+                <span class="text-light small"><i class="fas fa-phone-alt me-1"></i> 客服热线 400 882 6688</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- 页面主体 -->
+<div class="container my-4 my-lg-5">
+    <!-- 顶部欢迎区 + 联系标语 -->
+    <div class="contact-header">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="display-5 fw-bold mb-3"><i class="fas fa-envelope-open-text me-3"></i>我们随时为您服务</h1>
+                <p class="lead mb-3">新鲜产品，贴心服务。无论是订单咨询、建议反馈，还是合作洽谈，My Supermarket 团队期待与您沟通！</p>
+                <div class="contact-icon-box mt-2">
+                    <i class="fas fa-clock"></i>
+                    <span>周一至周日 08:00 - 22:00 | 全年无休</span>
+                </div>
+            </div>
+            <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
+                <i class="fas fa-people-arrows" style="font-size: 5rem; opacity: 0.7;"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- 左侧: 联系表单 + 社交媒体 -->
+        <div class="col-lg-7">
+            <div class="contact-form-card">
+                <h3 class="fw-bold mb-3" style="color:#1e3b2c;"><i class="fas fa-pen-alt me-2"></i>发送消息给我们</h3>
+                <p class="text-muted mb-4">我们会尽快回复您，通常24小时内响应。</p>
+                <form id="contactForm" action="#" method="post">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold"><i class="fas fa-user"></i> 您的姓名</label>
+                            <input type="text" class="form-control" id="nameInput" placeholder="例如： 张明" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold"><i class="fas fa-envelope"></i> 电子邮箱</label>
+                            <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-semibold"><i class="fas fa-phone-alt"></i> 联系电话（选填）</label>
+                            <input type="tel" class="form-control" id="phoneInput" placeholder="方便我们与您联系">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-semibold"><i class="fas fa-tag"></i> 咨询主题</label>
+                            <select class="form-select" id="subjectSelect">
+                                <option selected>商品信息咨询</option>
+                                <option>订单与配送</option>
+                                <option>售后与退换货</option>
+                                <option>合作建议/商务洽谈</option>
+                                <option>其他建议</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-semibold"><i class="fas fa-comment-dots"></i> 留言内容</label>
+                            <textarea class="form-control" rows="4" id="messageContent" placeholder="请告诉我们您的需求或建议..." required></textarea>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane me-2"></i>发送消息</button>
+                        </div>
+                        <div class="col-12">
+                            <div id="formFeedbackMsg" class="small mt-2 fst-italic text-success"></div>
+                        </div>
+                    </div>
+                </form>
+                <hr class="my-4">
+                <div class="text-center">
+                    <h5 class="fw-bold mb-3"><i class="fas fa-share-alt"></i> 关注我们，获取每日新鲜资讯</h5>
+                    <div>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧: 联系信息 + 营业 + 地图模拟 -->
+        <div class="col-lg-5">
+            <div class="info-card mb-4">
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h4 class="info-title">超市门店地址</h4>
+                <p class="mb-2">上海市浦东新区世纪大道100号<br>环球金融中心B1层 My Supermarket</p>
+                <p><i class="fas fa-subway me-1 text-success"></i> 地铁2号线 陆家嘴站 6号出口步行3分钟</p>
+                <div class="map-placeholder mt-3">
+                    <i class="fas fa-map" style="font-size: 2rem; color:#7c6e4e;"></i>
+                    <p class="mb-0 mt-2 small"><i class="fas fa-location-dot"></i> 地图指引 | 世纪大道&东泰路交叉口</p>
+                    <div class="mt-1">📍 停车便利 | 周一至周日全天营业</div>
+                </div>
+            </div>
+            
+            <div class="info-card mb-4">
+                <div class="info-icon"><i class="fas fa-headset"></i></div>
+                <h4 class="info-title">客服中心</h4>
+                <p><i class="fas fa-phone-alt me-2 text-success"></i> 热线：<strong>400-882-6688</strong><br>
+                <i class="fas fa-envelope me-2 text-success"></i> 邮箱：<strong>service@mysupermarket.com</strong><br>
+                <i class="fas fa-fax me-2 text-success"></i> 传真：021-6875 2234</p>
+                <hr>
+                <div class="small text-muted"><i class="fas fa-comment-dots"></i> 在线客服时间：08:00-22:00 (人工)，智能客服全天候</div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-truck-fast"></i></div>
+                <h4 class="info-title">配送 & 售后</h4>
+                <p><i class="fas fa-check-circle text-success me-1"></i> 订单满$30免费配送，1小时极速达（覆盖城区）<br>
+                <i class="fas fa-undo-alt text-success me-1"></i> 生鲜无理由退货，售后专线：400-882-6699<br>
+                <i class="fas fa-clock me-1"></i> 当日20:00前下单，次日12:00前送达</p>
+                <div class="bg-light p-2 rounded-3 text-center mt-2">
+                    <i class="fas fa-gift"></i> 加入会员享专属优惠 & 积分抵现
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 额外展示合作品牌或留言小贴士 -->
+    <div class="row mt-5 g-3 text-center">
+        <div class="col-md-4">
+            <div class="p-3 bg-white rounded-4 shadow-sm">
+                <i class="fas fa-handshake fa-2x text-success"></i>
+                <h6 class="mt-2 fw-bold">商务合作</h6>
+                <small class="text-muted">采购/供应联系：biz@mysupermarket.com</small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 bg-white rounded-4 shadow-sm">
+                <i class="fas fa-bullhorn fa-2x text-success"></i>
+                <h6 class="mt-2 fw-bold">媒体与推广</h6>
+                <small class="text-muted">pr@mysupermarket.com ｜ 品牌活动合作</small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 bg-white rounded-4 shadow-sm">
+                <i class="fas fa-briefcase fa-2x text-success"></i>
+                <h6 class="mt-2 fw-bold">人才招聘</h6>
+                <small class="text-muted">hr@mysupermarket.com 期待您加入</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer 与超市同步 -->
+<footer class="text-center py-4 mt-4">
+    <div class="container">
+        <p class="mb-0"><i class="fas fa-shopping-basket me-2"></i> My Supermarket — 新鲜生活每一天  |  <i class="fas fa-clock"></i> 营业时间 08:00 - 22:00</p>
+        <p class="small mt-2"><i class="fas fa-map-marker-alt"></i> 线上超市 | 极速配送 | 安心售后 | 部分商品支持全球购</p>
+        <p class="small mb-0 text-white-50">© 2025 My Supermarket | 用心服务，新鲜到家</p>
+    </div>
+</footer>
+
+<!-- 简易表单提交模拟 (演示提交反馈，不发送实际后端) -->
+<script>
+    (function() {
+        const form = document.getElementById('contactForm');
+        const feedbackDiv = document.getElementById('formFeedbackMsg');
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // 简单验证姓名和邮箱非空
+            const name = document.getElementById('nameInput').value.trim();
+            const email = document.getElementById('emailInput').value.trim();
+            const message = document.getElementById('messageContent').value.trim();
+            
+            if (!name) {
+                feedbackDiv.innerHTML = '<i class="fas fa-exclamation-triangle text-warning"></i> 请填写您的姓名';
+                feedbackDiv.style.color = "#c45c1b";
+                setTimeout(() => { feedbackDiv.innerHTML = ''; }, 2500);
+                return;
+            }
+            if (!email) {
+                feedbackDiv.innerHTML = '<i class="fas fa-exclamation-triangle text-warning"></i> 请填写电子邮箱地址';
+                feedbackDiv.style.color = "#c45c1b";
+                setTimeout(() => { feedbackDiv.innerHTML = ''; }, 2500);
+                return;
+            }
+            if (!email.includes('@') || !email.includes('.')) {
+                feedbackDiv.innerHTML = '<i class="fas fa-envelope-exclamation"></i> 邮箱格式不正确';
+                feedbackDiv.style.color = "#c45c1b";
+                setTimeout(() => { feedbackDiv.innerHTML = ''; }, 2500);
+                return;
+            }
+            if (!message) {
+                feedbackDiv.innerHTML = '<i class="fas fa-comment-slash"></i> 请填写留言内容';
+                feedbackDiv.style.color = "#c45c1b";
+                setTimeout(() => { feedbackDiv.innerHTML = ''; }, 2500);
+                return;
+            }
+            
+            // 模拟发送成功提示
+            feedbackDiv.innerHTML = '<i class="fas fa-check-circle"></i> 感谢您的留言！My Supermarket 客服会尽快与您联系。';
+            feedbackDiv.style.color = "#1f5a32";
+            // 可重置表单(非强制重点但可选)，为了演示更好体验，清除部分字段
+            document.getElementById('nameInput').value = '';
+            document.getElementById('emailInput').value = '';
+            document.getElementById('phoneInput').value = '';
+            document.getElementById('messageContent').value = '';
+            document.getElementById('subjectSelect').selectedIndex = 0;
+            setTimeout(() => {
+                feedbackDiv.innerHTML = '';
+            }, 4000);
+        });
+    })();
+</script>
+
+<!-- 可选Bootstrap JS (用于任何动态折叠等)-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

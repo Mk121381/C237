@@ -1,0 +1,243 @@
+/* style.css - Modern styling for Personal Information Form */
+
+/* Reset & base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: beige;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    line-height: 1.5;
+}
+
+/* Headings - blue color */
+h2 {
+    color: #1e4a8a;      /* Deep blue */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #d4a373;
+    display: inline-block;
+}
+
+/* ===== NEW: Styling for Ordered Lists (ol) and Unordered Lists (ul) ===== */
+ul, ol {
+    margin: 10px 0 20px 30px;
+    padding-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #2c3e4e;
+    line-height: 1.6;
+}
+
+/* List items */
+li {
+    margin-bottom: 6px;
+}
+
+/* Unordered list - circle style for a softer look */
+ul {
+    list-style-type: circle;
+}
+
+/* Ordered list - clean numbers */
+ol {
+    list-style-type: decimal;
+}
+
+/* Nested lists (if you ever use them) */
+ul ul, ol ul {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Optional: add a subtle hover effect on list items */
+li:hover {
+    color: #f39c12;
+    transition: color 0.2s ease;
+    cursor: default;
+}
+
+/* Form styling */
+form {
+    background-color: #fffef7;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin: 20px 0;
+}
+
+/* Form paragraph spacing */
+form p {
+    margin-bottom: 18px;
+}
+
+/* Labels / text before inputs */
+form p strong,
+form p span.label {
+    display: inline-block;
+    min-width: 100px;
+    font-weight: 600;
+    color: #2c3e4e;
+}
+
+/* Text inputs, email, tel, date */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 250px;
+    font-size: 14px;
+    transition: border 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus {
+    border-color: #f39c12;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.2);
+}
+
+/* Radio buttons group */
+input[type="radio"] {
+    margin: 0 5px 0 12px;
+    accent-color: #f39c12;
+}
+
+input[type="radio"]:first-of-type {
+    margin-left: 5px;
+}
+
+/* Textarea */
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+    margin-top: 5px;
+}
+
+textarea:focus {
+    border-color: #f39c12;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(243, 156, 18, 0.2);
+}
+
+/* ORANGE SUBMIT BUTTON */
+input[type="submit"] {
+    background-color: #f39c12;   /* Orange */
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="submit"]:hover {
+    background-color: #e67e22;   /* Darker orange on hover */
+    transform: scale(1.02);
+}
+
+input[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+
+
+/* ORANGE SUBMIT RESET */
+input[type="reset"] {
+    background-color: #f39c12;   /* Orange */
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 28px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input[type="reset"]:hover {
+    background-color: #e67e22;   /* Darker orange on hover */
+    transform: scale(1.02);
+}
+
+input[type="reset"]:active {
+    transform: scale(0.98);
+}
+
+
+/* Link styling with hover effect */
+a {
+    color: #1e4a8a;          /* Blue to match headings */
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-block;
+    margin-top: 8px;
+}
+
+/* Hover effect for links */
+a:hover {
+    color: #f39c12;          /* Turns orange on hover */
+    text-decoration: underline;
+    transform: translateX(3px);
+}
+
+/* Back link specific spacing */
+p:last-child {
+    margin-top: 15px;
+}
+
+/* Make form responsive on small screens */
+@media (max-width: 550px) {
+    body {
+        padding: 20px 15px;
+    }
+    
+    form {
+        padding: 20px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"] {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    textarea {
+        max-width: 100%;
+    }
+    
+    /* Adjust list margins on mobile */
+    ul, ol {
+        margin-left: 20px;
+    }
+}
